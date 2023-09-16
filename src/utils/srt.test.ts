@@ -1,4 +1,4 @@
-import { shiftTime } from "./srtParser"
+import { shiftTime } from "./srt"
 
 describe("shiftTime", () => {
   it("shifts time by positive seconds", () => {

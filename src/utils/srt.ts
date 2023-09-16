@@ -17,6 +17,15 @@ function secondsToTimeString(time: number) {
   return `${hours}:${minutes}:${seconds},${milliseconds}`
 }
 
+export function readFile(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result as string)
+    reader.onerror = () => reject(reader.error)
+    reader.readAsText(file)
+  })
+}
+
 export interface Subtitle {
   from: string
   to: string
