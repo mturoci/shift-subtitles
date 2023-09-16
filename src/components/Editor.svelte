@@ -4,6 +4,7 @@
     shiftTime,
     subtitleToSrt,
     type Subtitle,
+    timeStringToSeconds,
   } from "../utils/srtParser";
   import FileUploadIcon from "../assets/upload-file-icon.svelte";
   import ArrowRight from "../assets/arrow-right.svelte";
@@ -11,7 +12,39 @@
   import Button from "./Button.svelte";
 
   const EDITOR_HEIGHT = "h-[calc(100vh-350px)] min-h-[300px]";
-  let subtitles: Subtitle[] = [];
+  let subtitles: Subtitle[] = [
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+    { from: "00:00:00,000", to: "00:00:00,000", text: "Hello world" },
+  ];
   let moveSeconds = 1;
   let fileName = "subtitles";
 
@@ -60,14 +93,14 @@
   class="bg-white flex flex-wrap justify-center items-stretch p-5 rounded-xl bg-opacity-40"
 >
   {#if subtitles.length}
-    <div class="flex flex-col max-h-full grow overflow-y-auto {EDITOR_HEIGHT}">
+    <ol class="max-h-full grow overflow-y-auto {EDITOR_HEIGHT}">
       {#each subtitles as subtitle}
-        <div class="mb-2 last:mb-0">
+        <li class="mb-2 last:mb-0">
           <p class="text-sm text-gray-600">{subtitle.from} --> {subtitle.to}</p>
           <p class="text-m text-gray-700">{subtitle.text}</p>
-        </div>
+        </li>
       {/each}
-    </div>
+    </ol>
     <div class="px-2 basis-[500px]">
       <h2 class="text-2xl font-bold leading-10 tracking-wider text-center">
         Settings
@@ -77,16 +110,17 @@
 
       <div class="flex justify-evenly mt-5">
         <Button
-          className="inline-flex flex-row-reverse items-center bg-secondary"
+          className="inline-flex flex-row-reverse items-center bg-secondary-500 hover:bg-secondary-600"
           label="Shift backward"
           onClick={shift(true)}
+          disabled={timeStringToSeconds(subtitles[0].from) - moveSeconds < 0}
         >
           <ArrowRight className="w-3.5 h-3.5 mr-2 rotate-180" />
         </Button>
         <Button
           label="Shift forward"
           onClick={shift(false)}
-          className="inline-flex items-center bg-secondary"
+          className="inline-flex items-center bg-secondary-500 hover:bg-secondary-600"
         >
           <ArrowRight className="w-3.5 h-3.5 ml-2" />
         </Button>
@@ -94,7 +128,7 @@
       <Button
         label="Download"
         onClick={download}
-        className="mt-5 block mx-auto px-10 bg-primary"
+        className="mt-5 block mx-auto px-10 bg-primary-500 hover:bg-primary-600"
       />
     </div>
   {:else}

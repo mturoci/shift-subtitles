@@ -1,4 +1,4 @@
-function timeStringToSeconds(timeString: string) {
+export function timeStringToSeconds(timeString: string) {
   const [hours, minutes, secondsAndMs] = timeString.split(":")
   const [seconds, ms] = secondsAndMs.split(",")
   return (
