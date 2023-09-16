@@ -18,6 +18,9 @@
   let fileName = "subtitles";
   let from = 1;
   let to = subtitles.length;
+  let totalShifted = 0;
+  $: to, (totalShifted = 0);
+  $: from, (totalShifted = 0);
 
   async function handleFileUpload(event: Event) {
     const files = (event.target as HTMLInputElement).files;
@@ -31,6 +34,7 @@
   }
   const shift = (isBackward: boolean) => () => {
     const offset = isBackward ? -moveSeconds : moveSeconds;
+    totalShifted += offset;
     subtitles = subtitles.map((subtitle, idx) => {
       if (idx < from - 1 || idx >= to) return subtitle;
       return {
@@ -66,7 +70,7 @@
 >
   {#if subtitles.length}
     <ol class="max-h-full grow overflow-y-auto {EDITOR_HEIGHT} subtitles">
-      {#each subtitles.slice((from || 1) - 1, to || subtitles.length) as subtitle, idx (subtitle.from)}
+      {#each subtitles.slice((from || 1) - 1, to || subtitles.length) as subtitle, idx}
         <span
           class="float-left bg-secondary-600 mr-5 mt-[3px] h-6 min-w-[44px] rounded-full text-white text-center leading-7"
           >{idx + Number(from)}</span
@@ -86,7 +90,7 @@
       <Input bind:val={to} type="text" label="End shifting at" />
       <Input val={moveSeconds} type="number" label="Seconds to shift" />
 
-      <div class="flex justify-between mt-5">
+      <div class="flex items-center justify-between mt-5">
         <Button
           className="inline-flex flex-row-reverse items-center bg-secondary-500 hover:bg-secondary-600"
           label="Shift backward"
@@ -95,6 +99,7 @@
         >
           <ArrowRight className="w-3.5 h-3.5 mr-2 rotate-180" />
         </Button>
+        <p class="tracking-wider text-2xl">{totalShifted}s</p>
         <Button
           label="Shift forward"
           onClick={shift(false)}
