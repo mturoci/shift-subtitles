@@ -81,7 +81,7 @@
         </li>
       {/each}
     </ol>
-    <div class="pl-5 basis-[500px]">
+    <div class="xl:pl-5 basis-[500px]">
       <h2 class="text-2xl font-bold leading-10 tracking-wider text-center">
         Settings
       </h2>
@@ -99,7 +99,7 @@
         >
           <ArrowRight className="w-3.5 h-3.5 mr-2 rotate-180" />
         </Button>
-        <p class="tracking-wider text-2xl">{totalShifted}s</p>
+        <p class="tracking-wider text-2xl p-3">{totalShifted}s</p>
         <Button
           label="Shift forward"
           onClick={shift(false)}
