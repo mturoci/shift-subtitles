@@ -12,7 +12,7 @@
   import Input from "./Input.svelte";
   import Button from "./Button.svelte";
 
-  const EDITOR_HEIGHT = "h-[calc(100vh-350px)] min-h-[300px]";
+  const EDITOR_HEIGHT = "h-[calc(100vh-430px)] min-h-[300px]";
   let subtitles: Subtitle[] = [];
   let moveSeconds = 1;
   let fileName = "subtitles";
