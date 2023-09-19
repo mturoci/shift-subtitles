@@ -111,7 +111,7 @@
       <Button
         label="Download"
         onClick={download}
-        className="mt-5 block mx-auto px-10 bg-primary-500 hover:bg-primary-600"
+        className="mt-5 block mx-auto px-10 bg-primary-600 hover:bg-primary-700"
       />
     </div>
   {:else}
