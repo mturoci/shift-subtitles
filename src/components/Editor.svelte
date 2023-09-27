@@ -114,6 +114,13 @@
         className="mt-5 block mx-auto px-10 bg-primary-600 hover:bg-primary-700"
       />
     </div>
+  {:else if !window.FileReader}
+    <div class="flex items-center justify-center {EDITOR_HEIGHT}">
+      <p class="text-2xl">
+        Sorry, but your browser is too old to support this app. Please update
+        and try again.
+      </p>
+    </div>
   {:else}
     <label
       for="file-upload"
